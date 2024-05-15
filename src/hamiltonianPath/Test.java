@@ -22,7 +22,7 @@ public class Test {
                         {100000, -100000}
                 }
         };
-        HamiltonianPathsV2 hamiltonianPaths = new HamiltonianPathsV2();
+        SolutionV2 hamiltonianPaths = new SolutionV2();
         for (int[][] edges : input) {
             int[] ints = hamiltonianPaths.restoreArray(edges);
             for (int i = 0; i < ints.length; i++) {

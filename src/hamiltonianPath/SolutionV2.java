@@ -2,15 +2,15 @@ package hamiltonianPath;
 
 import java.util.*;
 
-public class HamiltonianPathsV2 {
+public class SolutionV2 {
 
     public int[] restoreArray(int[][] adjacentPairs) {
         Map<Integer, List<Integer>> graph = buildGraph(adjacentPairs);
         int[] result = new int[graph.size()];
         Set<Integer> visitedStarts = new HashSet<>();
         while (true) {
-            int startVertex = findStartVertex(graph, visitedStarts);
-            if (startVertex == -1) {
+            Integer startVertex = findStartVertex(graph, visitedStarts);
+            if (startVertex == null) {
                 return result;
             }
             Set<Integer> visited = new HashSet<>();
@@ -52,13 +52,13 @@ public class HamiltonianPathsV2 {
         return graph;
     }
 
-    private int findStartVertex(Map<Integer, List<Integer>> graph, Set<Integer> visited) {
+    private Integer findStartVertex(Map<Integer, List<Integer>> graph, Set<Integer> visited) {
         for (int vertex : graph.keySet()) {
             if (graph.get(vertex).size() == 1 && !visited.contains(vertex)) {
                 visited.add(vertex);
                 return vertex;
             }
         }
-        return -1;
+        return null;
     }
 }

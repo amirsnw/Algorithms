@@ -2,7 +2,7 @@ package hamiltonianPath;
 
 import java.util.*;
 
-public class HamiltonianPaths {
+public class SolutionV1 {
 
     public int[] restoreArray(int[][] adjacentPairs) {
         Map<Integer, Set<Integer>> graph = extractVertices(adjacentPairs);
@@ -12,7 +12,7 @@ public class HamiltonianPaths {
         for (int startVertex : graph.keySet()) {
             path.add(startVertex);
             visited.add(startVertex);
-            if (findAllPathsUtil(graph, startVertex, visited, path)) {
+            if (dfs(graph, startVertex, visited, path)) {
                 return path.stream().mapToInt(Integer::intValue).toArray();
             }
             path.remove(path.size() - 1);
@@ -34,8 +34,8 @@ public class HamiltonianPaths {
         return adjList;
     }
 
-    private boolean findAllPathsUtil(Map<Integer, Set<Integer>> graph, int current,
-                                  Set<Integer> visited, List<Integer> path) {
+    private boolean dfs(Map<Integer, Set<Integer>> graph, int current,
+                        Set<Integer> visited, List<Integer> path) {
         if (visited.size() == graph.size()) {
             return true;
         }
@@ -44,7 +44,7 @@ public class HamiltonianPaths {
             if (!visited.contains(neighbor)) {
                 visited.add(neighbor);
                 path.add(neighbor);
-                if (findAllPathsUtil(graph, neighbor, visited, path)) {
+                if (dfs(graph, neighbor, visited, path)) {
                     return true;
                 }
                 path.remove(path.size() - 1);
